@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * todo Update the route to DELETE method for security reasons.
+ *
  * @Route("/{userToDelete<\d+>}/delete", name="app_user_delete", methods={"GET"})
  * @Security("userToDelete.organization.id == organization")
  * @IsGranted(UserVoter::CAN_EDIT, subject="userToDelete")

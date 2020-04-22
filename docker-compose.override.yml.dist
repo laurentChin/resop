@@ -37,3 +37,18 @@ services:
       - postgres-data:/var/lib/postgresql/data:rw
 #    ports:
 #        - '5432:5432' # Uncomment if you need to access the DB from your host
+
+# Uncomment the following services to run Behat tests
+#  selenium-chrome:
+#    image: selenium/node-chrome
+#    volumes:
+#      - /dev/shm:/dev/shm
+#    depends_on:
+#      - selenium-hub
+#    environment:
+#      HUB_HOST: selenium-hub
+#
+#  selenium-hub:
+#    image: selenium/hub
+#    ports:
+#      - "4444:4444" # Uncomment if you need to access Selenium from your host

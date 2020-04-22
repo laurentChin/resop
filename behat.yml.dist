@@ -10,6 +10,12 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
     extensions:
         Behat\MinkExtension:
+            browser_name: "chrome"
+            javascript_session: selenium2
+            selenium2:
+                wd_host: http://selenium-hub:4444/wd/hub
+                capabilities:
+                    browser: "chrome"
             sessions:
                 symfony:
                     symfony: ~

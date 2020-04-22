@@ -35,6 +35,7 @@
   },
   "require-dev": {
     "behat/behat": "^3.6",
+    "behat/mink-selenium2-driver": "^1.4",
     "dama/doctrine-test-bundle": "^6.3",
     "escapestudios/symfony2-coding-standard": "^3.11",
     "friends-of-behat/mink": "^1.8",

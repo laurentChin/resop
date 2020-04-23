@@ -103,3 +103,47 @@ Feature:
         Then the response status code should be 403
         When I go to "/organizations/2/users/4/delete"
         Then the response status code should be 405
+
+    Scenario: As an admin of an organization, I cannot access a user with a mismatched url
+        Given I am authenticated as "john.doe@resop.com"
+        When I go to "/organizations/1/users/2/edit"
+        Then the response status code should be 404
+
+    Scenario: As an admin of an organization, i can promote a user as admin of its organization and this user has admin privilege
+        Given I am authenticated as "freddy.mercury@resop.com"
+        When I go to "/organizations/4/users/5/edit"
+        And I follow "Promouvoir administrateur de UL DE BRIE ET CHANTEREINE"
+        Then I should be on "/organizations/4/users/5/edit"
+        And the response status code should be 200
+        And I should see "L'utilisateur \"Chuck NORRIS\" a été promu administrateur de UL DE BRIE ET CHANTEREINE avec succès."
+        And I should see "Révoquer la fonction d'administrateur de UL DE BRIE ET CHANTEREINE"
+        Given I am authenticated as "chuck.norris@resop.com"
+        When I go to "/organizations/4"
+        Then the response status code should be 200
+
+    Scenario: As an admin of an organization, I can revoke user's admin privilege of its organization and this user doesn't have admin privilege anymore
+        Given I am authenticated as "lady.gaga@resop.com"
+        When I go to "/organizations/4/users/4/edit"
+        And I follow "Révoquer la fonction d'administrateur de UL DE BRIE ET CHANTEREINE"
+        Then I should be on "/organizations/4/users/4/edit"
+        And the response status code should be 200
+        And I should see "Le privilège d'administrateur pour la structure UL-DE-BRIE-ET-CHANTEREINE de \"Freddy MERCURY\" a été révoquée avec succès."
+        And I should see "Promouvoir administrateur de UL DE BRIE ET CHANTEREINE"
+        Given I am authenticated as "freddy.mercury@resop.com"
+        When I go to "/organizations/4"
+        Then the response status code should be 403
+
+    Scenario: As an admin of an organization, i cannot promote admin a user who is already admin
+        Given I am authenticated as "lady.gaga@resop.com"
+        When I go to "/organizations/4/users/4/promote-admin"
+        Then the response status code should be 400
+
+    Scenario: As an admin of an organization, i cannot promote admin an user which does not belong to the organization
+        Given I am authenticated as "lady.gaga@resop.com"
+        When I go to "/organizations/4/users/1/promote-admin"
+        Then the response status code should be 400
+
+    Scenario: As an admin of an organization, i cannot revoke an user who is not an admin
+        Given I am authenticated as "lady.gaga@resop.com"
+        When I go to "/organizations/4/users/5/revoke-admin"
+        Then the response status code should be 400

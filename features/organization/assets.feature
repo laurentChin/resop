@@ -118,6 +118,11 @@ Feature:
         When I go to "/organizations/1/assets/75012/edit"
         Then the response status code should be 403
 
+    Scenario: As an admin of an organization, I cannot update an asset with a mismatched url
+        Given I am authenticated as "john.doe@resop.com"
+        When I go to "/organizations/1/assets/75012/edit"
+        Then the response status code should be 404
+
     @javascript
     Scenario Outline: As an admin of an organization, I can delete an asset from my organization or children organizations
         Given I am authenticated as "<login>"
@@ -145,3 +150,8 @@ Feature:
         Then the response status code should be 403
         When I go to "/organizations/2/assets/77992/delete"
         Then the response status code should be 405
+
+    Scenario: As an admin of an organization, I cannot access availability of an asset with a mismatched url
+        Given I am authenticated as "john.doe@resop.com"
+        When I go to "/organizations/1/availability/75012/2020-W10"
+        Then the response status code should be 404

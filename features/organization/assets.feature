@@ -45,8 +45,8 @@ Feature:
         When I go to "/organizations/1/assets"
         Then the response status code should be 403
 
-    Scenario: As an authenticated parent organization, I can add an asset from my organization or children organizations
-        Given I am authenticated as "DT75"
+    Scenario Outline: As an authenticated parent organization, I can add an asset from my organization or children organizations
+        Given I am authenticated as "<login>"
         When I go to "/organizations/3/assets"
         And I follow "Ajouter un nouveau véhicule"
         Then I should be on "/organizations/3/assets/add"
@@ -66,19 +66,18 @@ Feature:
         And the response status code should be 200
         And I should see "Véhicule créé"
         And I should see "VL - new vehicule"
-        #don't know how to grab the new id...
-        When I go to "/organizations/3/assets/[id]/edit"
-        Then I should be on "/organizations/3/assets/[id]/edit"
+        When I follow "Modifier" at position -1
+        Then I should be on "/organizations/3/assets/1/edit"
         And the response status code should be 200
         And the "commissionable_asset_type" field should contain "VL"
         And the "commissionable_asset_name" field should contain "new vehicule"
-        And the "commissionable_has_mobile_radio" field should contain "1"
-        And the "commissionable_has_first_aid_kit" field should contain "1"
-        And the "commissionable_parking_location" field should contain "1"
-        And the "commissionable_contact" field should contain "some contact"
-        And the "commissionable_seating_capacity" field should contain "5"
-        And the "commissionable_license_plate" field should contain "some license plate"
-        And the "commissionable_comments" field should contain "some comments"
+        And the "commissionable_asset_hasMobileRadio_0" checkbox is checked
+        And the "commissionable_asset_hasFirstAidKit_0" checkbox is checked
+        And the "commissionable_asset_parkingLocation" field should contain "some parking location"
+        And the "commissionable_asset_contact" field should contain "some contact"
+        And the "commissionable_asset_seatingCapacity" field should contain "5"
+        And the "commissionable_asset_licensePlate" field should contain "some license plate"
+        And the "commissionable_asset_comments" field should contain "some comments"
         Examples:
             | login              |
             | john.doe@resop.com |

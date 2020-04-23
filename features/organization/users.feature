@@ -44,7 +44,7 @@ Feature:
         Given I am authenticated as "<login>"
         When I go to "/organizations/3/users"
         And I follow "Modifier"
-        Then I should be on "/organizations/3/users/3"
+        Then I should be on "/organizations/3/users/3/edit"
         And the response status code should be 200
         And the "user_identificationNumber" field should contain "990003A"
         And the "user_emailAddress" field should contain "jill.doe@resop.com"
@@ -59,8 +59,8 @@ Feature:
         Then I should be on "/organizations/3/users"
         And the response status code should be 200
         And I should see "Les informations ont été mises à jour avec succès."
-        When I go to "/organizations/3/users/3"
-        Then I should be on "/organizations/3/users/3"
+        When I go to "/organizations/3/users/3/edit"
+        Then I should be on "/organizations/3/users/3/edit"
         And the response status code should be 200
         And the "user_identificationNumber" field should contain "999999A"
         And the "user_emailAddress" field should contain "john.bon.jovi@resop.com"
@@ -93,12 +93,12 @@ Feature:
             | jane.doe@resop.com |
 
     Scenario: As an admin of an organization, I cannot directly delete a user from my organization
-        Given I am authenticated as "<login>"
-        When I go to "/organizations/2/users/4/delete"
+        Given I am authenticated as "john.doe@resop.com"
+        When I go to "/organizations/3/users/3/delete"
         Then the response status code should be 405
 
     Scenario: As an admin of an organization, I cannot delete a user from another organization
-        Given I am authenticated as "<login>"
+        Given I am authenticated as "john.doe@resop.com"
         When I go to "/organizations/2/users"
         Then the response status code should be 403
         When I go to "/organizations/2/users/4/delete"

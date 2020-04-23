@@ -16,10 +16,19 @@ Feature:
         And the response status code should be 200
         And I should see "DT75"
 
-    Scenario: As an admin of an organization but without a password, I cannot go to the homepage of my organization
+    Scenario Outline: As an admin of an organization but without a password, I cannot go to any page of my organization
         Given I am authenticated as "jane.doe@resop.com"
-        When I go to "/organizations/1"
+        When I go to "<url>"
         Then the response status code should be 403
+        Examples:
+            | url                     |
+            | /organizations/3        |
+            | /organizations/3/new    |
+            | /organizations/3/search |
+            | /organizations/3/edit   |
+            | /organizations/3/assets |
+            | /organizations/3/users  |
+            | /organizations/planning |
 
     Scenario Outline: As an admin of an organization, I cannot go to the homepage of another organization
         Given I am authenticated as "john.doe@resop.com"

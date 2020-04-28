@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('#to-delete-name').html($(this).data('display-name'));
     $('#confirm-update').data('url', $(this).data('href'));
 
-    $($(this).attr('data-modal')).modal('show');
+    $('#delete-item-modal').modal('show');
   });
 
   $('#confirm-update').on('click', function () {

@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+
+{% if form.organization is defined %}
+    {{ form_row(form.organization) }}
+{% endif %}
+{{ form_rest(form) }}
+
+<button class="btn btn-primary">{{ button_label|default('action.save')|trans }}</button>
+{{ form_end(form) }}

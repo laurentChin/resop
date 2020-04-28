@@ -56,7 +56,10 @@ common:
   phoneNumberShort: Tél
   type: Type
   yes: Oui
+  start: Début
+  end: Fin
 message:
+  confirmDelete: Vous êtes sur le point de supprimer l'élément
   deleteAssetWarning: "Vous êtes sur le point de supprimer le véhicule %asset% et toutes ses disponibilités."
   deleteSlotWarning: "Vous êtes sur le point de modifier la disponibilité de %nbAssets%"
   deleteUserWarning: "Vous êtes sur le point de supprimer le bénévole %user% et toutes ses disponibilités."
@@ -92,16 +95,23 @@ organization:
   edit: Modifier une structure
   editAll: Modifier mes structures
   editMissionType: Modifier les types de missions
+  editMission: Missions
   editUserProfile: Modifier un profil
   forecast: Projections
   label: Structure
   list: Liste des structures
+  mission:
+    addNew: Ajouter une nouvelle mission
+    confirmDelete: Vous êtes sur le point de supprimer la mission
+    deleteSuccessMessage: La mission a été supprimée avec succès
+    editFormTitle: Modifier une mission
+    mainTitle: Missions
+    name: Identifiant de la mission 
   missionType:
     addNew: Ajouter un nouveau type de mission
     assetTypes:
       number: Nombre
       type: Type
-    confirmDelete: Vous êtes sur le point de supprimer le type de mission
     deleteSuccessMessage: Le type de mission a été supprimé avec succès
     editFormTitle: Modifier un type de mission
     mainTitle: Types de missions

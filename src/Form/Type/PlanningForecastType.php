@@ -20,7 +20,7 @@ class PlanningForecastType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $organization = $builder->getData()['organization'];
+        $organization = $builder->getData()['organization'] ?? null;
         if (!$organization instanceof Organization || null === $organization->id) {
             throw new \InvalidArgumentException('PlanningForecastType must be initialized with an already persisted organization');
         }

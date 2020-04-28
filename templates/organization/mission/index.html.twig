@@ -1,0 +1,52 @@
+{% extends 'organization/base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('delete-item-modal') }}
+{% endblock %}
+
+{% block title %}{{ 'organization.mission.mainTitle' | trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'organization.mission.mainTitle' | trans }}</h1>
+
+    <div class="row">
+        <div class="col-12 text-right mb-2">
+            <a class="btn btn-success" href="{{ path('app_organization_mission_new') }}" role="button">{{ 'organization.mission.addNew' | trans }}</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>{{ 'common.name' | trans }}</th>
+                <th>{{ 'common.type' | trans }}</th>
+                <th>{{ 'common.start' | trans }}</th>
+                <th>{{ 'common.end' | trans }}</th>
+                <th>{{ 'common.actions' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for mission in missions %}
+                <tr>
+                    <td>{{ mission.name }}</td>
+                    <td>{{ mission.type }}</td>
+                    <td>{{ mission.start | date }}</td>
+                    <td>{{ mission.end | date }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{{ path('app_organization_mission_edit', {'id': mission.id}) }}">{{ 'action.edit' | trans }}</a>
+                        <a class="btn btn-outline-danger trigger-delete" data-display-name="{{ mission.name }}" href="#" data-href="{{ path('app_organization_mission_delete', { id: mission.id }) }}">{{ 'action.delete' | trans }}</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">{{ 'message.noAvailableData' | trans }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'organization/_delete_modal.html.twig' %}
+{% endblock %}
